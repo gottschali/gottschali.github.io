@@ -1,0 +1,219 @@
+#+TITLE:  Org-Mode Testfile
+#+SUBTITLE: Awesomeness in Emacs
+* Features
+** markup
+- *bold*
+- /italic/
+- =monospace=
+- ~code~
+- +strike through+
+- _underline_
+- [[https://github.com/edwardtufte/tufte-css][tufte-css]]
+  - [[Tasks]]
+- [-] checkboxes
+  - [X] Send mail
+  - [-] Research
+  - [ ] Submit
+- Numbered
+  1. Öpfel
+  2. eggs => ...
+  3. bread
+={{{clearpage}}}=
+
+** TODO Tasks
+*** NEXT Subtask
+:PROPERTIES:
+:Effort:   3:00
+:END:
+DEADLINE: <2022-08-22 Mon>
+*** CANCEL [#A] Priorites :alpha:
+:LOGBOOK:
+- State "CANCEL"     from              [2022-09-16 Fri 12:23]
+:END:
+
+*** WAIT [#B] More
+:LOGBOOK:
+- State "WAIT"       from              [2022-09-16 Fri 12:23]
+:END:
+
+*** LOOP [#C] Another
+*** DONE [#D] Sched Task
+SCHEDULED: <2022-08-17 Wed>
+:LOGBOOK:
+- State "DONE"       from              [2022-09-16 Fri 12:48]
+:END:
+
+** Code
+#+begin_src python :exports code
+import math
+# A comment <->
+def factorial(n):
+    """" Docstring """
+    if (n==0):
+        return 1
+    else:
+        return n * factorial(n-1)
+#+end_src
+
+#+RESULTS:
+
+** Citations
+We can call ~citar-insert~ to insert references like [cite:@mooreCrammingMoreComponents1998].
+
+There are [fn:1] also footnotes.
+If at the definition, jump back to the reference.  When called at a
+    [fn:: this is the inline definition of this footnote] footnote location with a prefix argument, offer the same menu as.
+
+#+name: test-table
+#+caption: A dummy table
+|-------------------------+----------------------------+---------------------|
+| It holds (that) ...     | We have ...                | Es gilt             |
+| fulfills property       | satisfies property         | erfüllt Eigenschaft |
+| in average              | on average                 | im Durchschnitt     |
+| ...                     |                            |                     |
+| monotonously increasing | monotonically increasing   | monton steigend     |
+|                         |                            |                     |
+|-------------------------+----------------------------+---------------------|
+
+[cite:@rougierDesignTextEditors2020]
+See in ref:test-table we can observe...
+Similarly [[test-table]] without org-ref?
+
+** MathPix export
+Die Punkte in der Ebene kann man einerseits durch Ortsvektoren, anderseits durch kartesische Koordinaten charakterisieren:
+$$
+\overrightarrow{O W}=\mathbf{w}=\left(\begin{array}{c}
+u \\
+v
+\end{array}\right), \quad \overrightarrow{O Z}=\mathbf{z}=\left(\begin{array}{l}
+x \\
+y
+\end{array}\right), \quad \ldots
+$$
+
+[[../assets/cauchy-mean-value.svg]]
+Added as normal link (external)
+[[file:~/org/assets/cauchy-mean-value.svg]]
+
+\begin{gathered}
+\mathbf{w}+\mathbf{z}=\left(\begin{array}{l}
+u \\
+v
+\end{array}\right)+\left(\begin{array}{l}
+x \\
+y
+\end{array}\right): \equiv\left(\begin{array}{l}
+u+x \\
+v+y
+\end{array}\right) \\
+\alpha \mathbf{w}=\alpha\left(\begin{array}{l}
+u \\
+v
+\end{array}\right): \equiv\left(\begin{array}{c}
+\alpha u \\
+\alpha v
+\end{array}\right)
+\end{gathered}
+
+\[
+\mathbf{Q}=\left(\begin{array}{cc}
+\cos \varphi & -\sin \varphi \\
+\sin \varphi & \cos \varphi
+\end{array}\right)
+\]
+
+** Writing \( \LaTeX \)
+=org-toggle-pretty-entities= will replace them with nice unicode
+
+We can do inline \( \exp (0) = 1 \) and also entire lines:
+#+name: eq:1
+\[ \exp (x) = \sum_{k=1}^{\infty} \frac{x^k}{k!}  \]
+\[ \exp (x) = \sum_{k=1}^{\infty} \frac{x^k}{k!}  \]
+
+In ref:eq:1 we showed that blah blah.
+
+*** LaaS
+~=>~ becomes \( \implies \)  and ;a \( \alpha \)
+
+xbar is \( \overline{x} \)
+
+x,. \( \vec{x} \)
+
+*** math-preview
+There are some customized bindings
+
+#+attr_latex: :engraved-theme doom-one
+#+begin_src elisp
+(math-preview-all)
+#+end_src
+
+#+RESULTS:
+
+** Environments
+#+begin_theorem
+1 + 1 = 2
+#+end_theorem
+
+#+begin_proof
+qed.
+#+end_proof
+
+#+ATTR_LATEX: :options [Title]
+#+begin_note
+You can still do this and that.
+#+end_note
+
+#+begin_warning
+This is very dangerous.
+Without a title
+#+end_warning
+
+
+#+begin_quote
+A wise man once said
+#+end_quote
+
+#+begin_comment
+A comment
+#+end_comment
+
+#+begin_example
+ ________________________________________
+/ I never loved another person the way I \
+| loved myself.                          |
+|                                        |
+\ -- Mae West                            /
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+#+end_example
+
+#+begin_verse
+An example text
+I do not know what this verse block does.
+#+end_verse
+
+#+begin_center
+Centered text
+#+end_center
+
+#+ATTR_LATEX: :float t
+#+BEGIN_SRC emacs-lisp
+  (defun Fib (n)
+    (if (< n 2) n (+ (Fib (- n 1)) (Fib (- n 2)))))
+#+END_SRC
+
+* Exporting :docs:
+- how to set location, or other params
+- stylesheet
+- =:noexport:= tag will be ignored.
+* References
+#+PRINT_BIBLIOGRAPHY:
+
+* Footnotes
+
+[fn:1] This is a footnote
